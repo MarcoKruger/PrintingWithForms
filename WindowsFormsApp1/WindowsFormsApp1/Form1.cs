@@ -31,7 +31,7 @@ namespace WindowsFormsApp1
                 MessageBox.Show("This gets hit first");
                 ProcessStartInfo printProcessInfo = new ProcessStartInfo()
                 {
-                    Verb = "print",
+                    Verb = "printing",
                     CreateNoWindow = true,
                     FileName = Filepath,
                     WindowStyle = ProcessWindowStyle.Hidden
@@ -40,10 +40,12 @@ namespace WindowsFormsApp1
                 Process printProcess = new Process();
                 MessageBox.Show("This gets hit third");
                 printProcess.StartInfo = printProcessInfo;
-                MessageBox.Show("This gets hit fourth");
+                MessageBox.Show(printProcess.StartInfo.FileName.ToString());// First error hits here !!!
+                MessageBox.Show(Filepath.ToString());
                 try
                 {
-                    printProcess.Start(); // First error hits here !!!
+                    printProcess.Start();
+                    MessageBox.Show(printProcess.StartInfo.FileName.ToString());// First error hits here !!!
                     MessageBox.Show("Got here");
                     printProcess.WaitForInputIdle();
                     MessageBox.Show("Looks like it will work");
